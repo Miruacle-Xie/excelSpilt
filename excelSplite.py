@@ -8,9 +8,8 @@ def main():
     dirPath = os.path.splitext(filePath)
     splitNum = input("输入分隔数量：\n")
     splitNum = eval(splitNum)
-    print(type(splitNum))
     df = pd.read_excel(filePath)
-    print(df)
+    # print(df)
     tmpNum = len(df) // splitNum
     if tmpNum != 0:
         for i in range(tmpNum + 1):
@@ -20,13 +19,13 @@ def main():
             else:
                 tmpath = dirPath[0] + "(" + str(tmpNum * splitNum + 1) + "-" + str(len(df)) + ")" + dirPath[1]
                 df_split = df.iloc[tmpNum * splitNum + 1: len(df), :]
-            print(df_split)
+            # print(df_split)
             writer = pd.ExcelWriter(tmpath)
             df_split.to_excel(writer, index=False)
             writer.save()
             writer.close()
             print(tmpath)
-
+        input("分隔完成，按回车结束")
     else:
         input("总数小于分隔数量，无需分隔，按回车结束")
 
